@@ -6,7 +6,7 @@ This repository contains two versions of an **HR Management Micro Control Progra
 - `server_cursor_ide`: Designed for use within **Cursor IDE's MCP environment**
 
 ---
-
+````
 ## 📁 Repository Structure
 
 .
