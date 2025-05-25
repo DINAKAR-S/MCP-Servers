@@ -1,11 +1,6 @@
 # MCP Servers
 
 ## Server 1 HR Management Application
-### ✅ Deployment Summary (Recap & Validation)
-
-Here’s a summary checklist to ensure your setup is properly ready to run via Claude Desktop:
-
----
 
 #### ✅ **Code Review (main.py)**
 
