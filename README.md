@@ -1,10 +1,3 @@
-* **Server 1:** Claude Desktop-compatible MCP app
-* **Server 2:** Cursor IDE-compatible MCP app (I assume it's FastMCP or another supported Python-based MCP)
-
-Here's a clear and professional `README.md` template that documents both setups in a clean structure:
-
----
-
 ```markdown
 # HR Management MCP Server Suite
 
