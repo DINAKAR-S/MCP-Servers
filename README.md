@@ -1,138 +1,259 @@
-# HR Management MCP Server Suite
+# MCP Servers
 
-This repository contains two versions of an **HR Management Micro Control Program (MCP) server** built with Python, designed for conversational interfaces and intelligent automation. The two variants are:
+## Server 1 HR Management Application
+### ✅ Deployment Summary (Recap & Validation)
 
-- `server_claude_desktop`: Designed for integration with **Claude Desktop**
-- `server_cursor_ide`: Designed for use within **Cursor IDE's MCP environment**
-
----
-
-## 📁 Repository Structure
-
-````
-├── server\_claude\_desktop/
-│   ├── main.py
-│   ├── .venv/
-│   ├── README.md
-│   └── other project files
-├── server\_cursor\_ide/
-│   ├── main.py
-│   ├── .venv/
-│   ├── README.md
-│   └── other project files
-└── README.md
-
-````
+Here’s a summary checklist to ensure your setup is properly ready to run via Claude Desktop:
 
 ---
 
-## 🧠 Project Features (Common to Both Servers)
+#### ✅ **Code Review (main.py)**
 
-- ✅ View employee leave balance
-- ✅ Apply leave for employees
-- ✅ Grant salary hikes
-- ✅ Update employee roles
-- ✅ Get summarized employee details
-- ✅ Built with `FastMCP` (or equivalent MCP toolset)
-- ✅ Uses dummy employee data for simulation
+* Uses `FastMCP` from `mcp.server.fastmcp`
+* Functions are well-decorated with `@mcp.tool()` or `@mcp.resource()`
+* Dummy employee records are rich and realistic
+* Handles edge cases like invalid input types and missing employees
 
 ---
 
-## 🖥️ Server 1: Claude Desktop MCP Server
+#### ✅ **Local MCP App Setup**
 
-### 📍 Path
-```bash
-server_claude_desktop/main.py
-````
+You did all the following correctly:
 
-### 🔧 Setup Steps
-
-1. Create virtual environment
-
-   ```bash
-   cd Server 1 Cluade Desktop
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
-
-2. Install MCP tools
+1. Created virtual environment → `.venv/`
+2. Installed dependencies with `uv`:
 
    ```bash
    pip install mcp[cli]
-   pip install typer
+   pip install --upgrade typer
+   uv pip install -r requirements.txt  # if needed
    ```
-
-3. Install the MCP server
+3. Registered the app:
 
    ```bash
    uv run mcp install main.py
    ```
 
-4. Open Claude Desktop and begin asking:
-
-   ```
-   > Show leave balance for EMP005
-   > Apply 10% hike to EMP001
-   > Update role of EMP007 to HR Manager
-   ```
-
 ---
 
-## 🧑‍💻 Server 2: Cursor IDE MCP Server
+#### ✅ **Claude Desktop Integration**
 
-### 📍 Path
+When you install with:
 
 ```bash
-server_cursor_ide/main.py
+uv run mcp install main.py
 ```
 
-### 🔧 Setup Steps
+→ it automatically updates **Claude Desktop’s `config.json`**, registering your app as:
 
-1. Open project in Cursor IDE.
-2. Ensure MCP plugin is installed and running.
-3. Run MCP server by executing:
+```
+Joshua EdTech HR Management Server
+```
 
-   ```bash
-   uv run mcp install main.py
-   ```
-4. Interact with the tools inside the Cursor AI interface.
+Then, you simply start **Claude Desktop** and interact via:
+
+```
+> What is the leave balance of EMP007?
+> Apply 10% hike for EMP003.
+> Update role of EMP010 to Project Lead.
+```
+
+Claude will route those through your `main.py` MCP server. ✅
 
 ---
 
-## 📋 Sample Dummy Employee Record
+### 📁 Project Layout Validation (from your screenshot)
+
+```
+hr_AppIn_MCP/
+├── .venv/                # Virtual environment
+├── __pycache__/          # Bytecode cache
+├── .gitignore
+├── .python-version
+├── main.py               ✅ MCP server code
+├── pyproject.toml        ✅ Optional for dependency tracking
+├── README.md             ✅ Optional doc
+├── uv.lock               ✅ Dependency lock
+```
+
+Looks perfect and clean. 👍
+
+---
+
+## 🧠 Server 2 MCP Demo Projects (Memory-Enabled Chat with MCP Tools)
+
+This project is a simple demonstration of using [LangChain MCP (Multi-Component Processors)](https://smith.langchain.com/) with a memory-enabled chat agent. It uses **Cursor** as the MCP Host, a terminal-based **MCP client**, and three MCP-compatible servers:
+
+* `@playwright/mcp`
+* `@openbnb/mcp-server-airbnb`
+* `duckduckgo-mcp-server`
+
+The LLM used is [`ChatGroq`](https://www.groq.com/) with the model `qwen-qwq-32b`.
+
+---
+
+### 📂 Project Structure
+
+```bash
+mcpdemo/
+├── .env                  # Environment variables (contains GROQ_API_KEY)
+├── .gitignore
+├── .python-version
+├── browser_mcp.json      # Configuration of MCP servers
+├── main.py               # Main async Python script for chat loop
+├── pyproject.toml        # Project dependencies managed with `uv`
+├── README.md             # (This file)
+├── uv.lock               # Lock file for reproducible environments
+└── .venv/                # (Optional) Python virtual environment
+```
+
+---
+
+### ⚙️ Requirements
+
+* Python 3.10+
+
+* [`uv`](https://github.com/astral-sh/uv) (recommended package manager)
+
+* A `.env` file with your Groq API Key:
+
+  ```
+  GROQ_API_KEY=your_groq_api_key_here
+  ```
+
+* Node.js (for `npx` to run MCP servers)
+
+* Internet connection to pull MCP servers via `npx`
+
+---
+
+### 🚀 Setup Instructions
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DINAKAR-S/MCP-Servers.git
+cd mcpdemo
+```
+
+#### 2. Set Up Virtual Environment (optional but recommended)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # For Unix/macOS
+# OR
+.venv\Scripts\activate     # For Windows
+```
+
+#### 3. Install Dependencies Using `uv`
+
+```bash
+uv pip install -r requirements.txt
+# OR use pyproject.toml directly
+uv venv .venv
+uv pip install -e .
+```
+
+Or to add libraries:
+
+```bash
+uv pip install langchain_groq python-dotenv
+```
+
+#### 4. Add Your API Key
+
+Create a `.env` file:
+
+```
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+#### 5. Run MCP Host in Cursor Editor
+
+Open Cursor and launch **MCP Host** (built-in feature in Cursor).
+
+#### 6. Run the MCP Client from Terminal
+
+```bash
+uv run main.py
+```
+
+---
+
+### 🛠️ MCP Server Configuration (in `browser_mcp.json`)
 
 ```json
 {
-  "emp_id": "EMP001",
-  "name": "John Doe",
-  "role": "Software Engineer",
-  "salary": 60000,
-  "leave_balance": 15
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "airbnb": {
+      "command": "npx",
+      "args": ["-y", "@openbnb/mcp-server-airbnb"]
+    },
+    "duckduckgo-search": {
+      "command": "npx",
+      "args": ["-y", "duckduckgo-mcp-server"]
+    }
+  }
 }
 ```
 
----
-
-## 📎 Requirements
-
-* Python 3.10+
-* `mcp` CLI or IDE extension
-* `typer`, `uv`, `FastMCP` (or compatible MCP package)
+This file tells the MCP client how to launch the required servers.
 
 ---
 
-## 📌 License
+### 💬 Usage
 
-This project is for educational and demonstration purposes. Feel free to adapt and extend it as per your use case.
+Run the client:
+
+```bash
+uv run main.py
+```
+
+You'll see:
+
+```
+Welcome to the MCP Demo!
+Type 'exit' or 'quit' to exit the conversation.
+Type 'clear' to clear the history of conversation.
+=================================================
+
+You:
+```
+
+* Type your queries.
+* Use `"clear"` to clear memory.
+* Use `"exit"` or `"quit"` to end the session.
 
 ---
 
-## 🤝 Contributions
+### 📦 Installed Libraries
 
-Pull requests and feedback are welcome. Fork the repo, make your changes, and submit a PR!
+* [`langchain_groq`](https://github.com/langchain-ai/langchain) - Integration with Groq models
+* `python-dotenv` - For loading environment variables
+* `asyncio` - For running async tasks
 
 ---
 
-## 📞 Contact
+### 📸 Preview
 
-Maintainer: Dinakar S
+![Preview](./preview.png)
+
+---
+
+### 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+### 🙌 Acknowledgements
+
+* [LangChain MCP](https://smith.langchain.com/)
+* [Groq LLM](https://www.groq.com/)
+* [Cursor IDE](https://www.cursor.sh/)
+* [uv - Lightning-fast Python packaging](https://github.com/astral-sh/uv)
+
