@@ -5,8 +5,6 @@ Here's a clear and professional `README.md` template that documents both setups 
 
 ---
 
-### ✅ `README.md` (Copy & Paste this)
-
 ```markdown
 # HR Management MCP Server Suite
 
@@ -62,7 +60,7 @@ server_claude_desktop/main.py
 1. Create virtual environment
 
    ```bash
-   cd server_claude_desktop
+   cd Server 1 Cluade Desktop
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
