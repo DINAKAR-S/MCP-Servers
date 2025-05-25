@@ -1,4 +1,3 @@
-```markdown
 # HR Management MCP Server Suite
 
 This repository contains two versions of an **HR Management Micro Control Program (MCP) server** built with Python, designed for conversational interfaces and intelligent automation. The two variants are:
@@ -9,8 +8,6 @@ This repository contains two versions of an **HR Management Micro Control Progra
 ---
 
 ## 📁 Repository Structure
-
-```
 
 .
 ├── server\_claude\_desktop/
